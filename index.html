@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preggo.AI – Pregnancy Information Assistant (Prototype)</title>
+  <meta name="description" content="Preggo.AI is an SMU COR2221 school-project prototype: a friendly chatbot that shares general pregnancy information.">
+  <meta name="theme-color" content="#f7c6d0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- =====================================================================
+       GOOGLE EMBED SNIPPET 1 of 2  —  PASTE INSIDE <head>
+       ---------------------------------------------------------------------
+       Paste the official CX Agent Studio "Web Widget" <script> and
+       <link rel="stylesheet"> tags (chat-messenger.js + the two theme CSS
+       files) between the START and END markers below.
+       ===================================================================== -->
+  <!-- ▼▼▼ START: GOOGLE SNIPPET 1 (head: script + stylesheets) ▼▼▼ -->
+  <script defer
+    src="https://www.gstatic.com/chat-messenger/sdk/prod/v1.16/chat-messenger.js">
+  </script>
+  <link rel="stylesheet" href="https://www.gstatic.com/chat-messenger/sdk/prod/v1.16/themes/chat-messenger-default.css">
+  <link rel="stylesheet" href="https://www.gstatic.com/chat-messenger/sdk/prod/v1.16/themes/chat-messenger-layout.css">
+  <!-- ▲▲▲ END: GOOGLE SNIPPET 1 ▲▲▲ -->
+
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="Preggo.AI home">
+        <span class="brand-mark" aria-hidden="true">🤰</span>
+        <span class="brand-name">Preggo<span class="brand-dot">.AI</span></span>
+      </a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#how">How to use</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#chat" class="nav-cta">Chat now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ Welcome ============ -->
+    <section id="top" class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">SMU COR2221 · AI &amp; Humanity prototype</p>
+          <h1>Welcome to <span class="accent">Preggo.AI</span></h1>
+          <p class="lead">
+            A gentle, always-available companion that helps you find general
+            information about pregnancy — from early symptoms to preparing
+            for your little one.
+          </p>
+          <div class="hero-actions">
+            <a href="#chat" class="btn btn-primary">Start chatting</a>
+            <a href="#privacy" class="btn btn-ghost">Read the notice first</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="bubble bubble-user">Is it normal to feel tired in the first trimester?</div>
+          <div class="bubble bubble-bot">Many people do! Here's some general information… 💗</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ About ============ -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2>What is Preggo.AI?</h2>
+        <p class="section-intro">
+          Preggo.AI is a conversational assistant built with Google's
+          CX Agent Studio. It answers everyday pregnancy questions in plain,
+          friendly language.
+        </p>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">📚</div>
+            <h3>General information</h3>
+            <p>Learn about pregnancy stages, common symptoms, nutrition and wellbeing.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🕒</div>
+            <h3>Available anytime</h3>
+            <p>Ask questions whenever they come up, day or night.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">🩺</div>
+            <h3>Points you to care</h3>
+            <p>Encourages you to speak with a doctor or midwife for anything personal or urgent.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ How to use ============ -->
+    <section id="how" class="section section-tint">
+      <div class="container">
+        <h2>How to use it</h2>
+        <ol class="steps">
+          <li><strong>Open the chat</strong> using the chat window or bubble on this page.</li>
+          <li><strong>Ask a question</strong> in your own words, e.g. “What foods should I avoid?”</li>
+          <li><strong>Check with a professional</strong> before acting on anything important.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ Prototype & privacy notice ============ -->
+    <section id="privacy" class="section">
+      <div class="container">
+        <div class="notice" role="note" aria-labelledby="notice-title">
+          <h2 id="notice-title">⚠️ Prototype &amp; privacy notice</h2>
+          <ul>
+            <li>
+              <strong>This is a student prototype</strong> made for an SMU
+              course project. It is not a medical device or a commercial service.
+            </li>
+            <li>
+              <strong>Not medical advice.</strong> Answers are general and may be
+              incomplete or wrong. Always consult a qualified doctor, midwife or
+              pharmacist about your own health.
+            </li>
+            <li>
+              <strong>In an emergency</strong> (e.g. heavy bleeding, severe pain,
+              reduced baby movements), call <a href="tel:995">995</a> or go to
+              the nearest A&amp;E immediately.
+            </li>
+            <li>
+              <strong>This website does not store your conversations.</strong>
+              Messages are sent to and processed by Google's CX Agent Studio
+              service, which powers the chatbot.
+            </li>
+            <li>
+              <strong>Please don't share personal details</strong> such as your
+              full name, NRIC, contact details or medical records.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Chat ============ -->
+    <section id="chat" class="section section-tint">
+      <div class="container">
+        <h2>Chat with Preggo.AI</h2>
+        <p class="section-intro">
+          By using the chat you acknowledge the notice above.
+        </p>
+        <div class="chat-hint">
+          <span class="chat-hint-icon" aria-hidden="true">💬</span>
+          <p>
+            Look for the <strong>Preggo.AI chat</strong> window or bubble at
+            the <strong>bottom-right</strong> of your screen.
+          </p>
+        </div>
+        <noscript>
+          <p class="chat-hint">The chat needs JavaScript enabled in your browser.</p>
+        </noscript>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Preggo.AI · SMU COR2221 AI &amp; Humanity school project · © <span id="year">2026</span></p>
+      <p class="footer-small">Prototype for educational purposes only. Not a substitute for professional medical advice.</p>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       GOOGLE EMBED SNIPPET 2 of 2  —  PASTE AT THE END OF <body>
+       ---------------------------------------------------------------------
+       Paste the official CX Agent Studio "Web Widget" body code here:
+       the <script> that calls chatSdk.registerContext(...) AND the
+       <chat-messenger> ... </chat-messenger> element.
+       Tip: set color-scheme="light" on <chat-messenger> to suit this theme.
+       ===================================================================== -->
+  <!-- ▼▼▼ START: GOOGLE SNIPPET 2 (body: register script + <chat-messenger>) ▼▼▼ -->
+  <script>
+    window.addEventListener("chat-messenger-loaded", () => {
+      chatSdk.registerContext(
+        chatSdk.prebuilts.ces.createContext({
+          deploymentName: "projects/294790140312/locations/us/apps/db7a7e7b-9b57-4142-a606-e62d2f2ff1dc/deployments/9d680ce7-be44-4211-977a-3e3397b74d0d",
+          tokenBroker: {
+            enableTokenBroker: true,
+            enableRecaptcha: false
+          }
+        }),
+      );
+    });
+  </script>
+  <!-- Update the url-allowlist attribute with a comma-separated list of origins allowed to render images -->
+  <chat-messenger
+    url-allowlist="*"
+    color-scheme="light"
+  >
+    <chat-messenger-container
+      chat-title="Preggo.AI"
+      chat-title-icon="https://gstatic.com/dialogflow-console/common/assets/ccai-favicons/conversational_agents.png"
+    >
+      <chat-reset-session-button
+        slot="titlebar-actions"
+        title-text="Start new chat"
+      ></chat-reset-session-button>
+      <chat-toggle-dialog-button
+        slot="titlebar-actions"
+        title-text-expanded="Collapse"
+        title-text-collapsed="Expand"
+      ></chat-toggle-dialog-button>
+      <chat-messenger-close-button
+        slot="titlebar-actions"
+        title-text="Close"
+      ></chat-messenger-close-button>
+    </chat-messenger-container>
+  </chat-messenger>
+  <!-- ▲▲▲ END: GOOGLE SNIPPET 2 ▲▲▲ -->
+
+</body>
+</html>
