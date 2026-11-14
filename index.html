@@ -3,233 +3,206 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preggo.AI – Pregnancy Information Assistant (Prototype)</title>
-  <meta name="description" content="Preggo.AI is an SMU COR2221 school-project prototype: a friendly chatbot that shares general pregnancy information.">
-  <meta name="theme-color" content="#f7c6d0">
+  <title>MamaFirst.AI – a gentle chat companion for first-time mums in Singapore</title>
+  <meta name="description" content="MamaFirst.AI is a free, private chat companion for first-time mums in Singapore, from the third trimester to baby's first birthday. A companion, not a doctor.">
+  <meta name="theme-color" content="#FFE1E1">
 
+  <!-- Fonts: Poppins for headings, Open Sans for body text -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
-
-  <!-- =====================================================================
-       GOOGLE EMBED SNIPPET 1 of 2  —  PASTE INSIDE <head>
-       ---------------------------------------------------------------------
-       Paste the official CX Agent Studio "Web Widget" <script> and
-       <link rel="stylesheet"> tags (chat-messenger.js + the two theme CSS
-       files) between the START and END markers below.
-       ===================================================================== -->
-  <!-- ▼▼▼ START: GOOGLE SNIPPET 1 (head: script + stylesheets) ▼▼▼ -->
-  <script defer
-    src="https://www.gstatic.com/chat-messenger/sdk/prod/v1.16/chat-messenger.js">
-  </script>
-  <link rel="stylesheet" href="https://www.gstatic.com/chat-messenger/sdk/prod/v1.16/themes/chat-messenger-default.css">
-  <link rel="stylesheet" href="https://www.gstatic.com/chat-messenger/sdk/prod/v1.16/themes/chat-messenger-layout.css">
-  <!-- ▲▲▲ END: GOOGLE SNIPPET 1 ▲▲▲ -->
-
   <script defer src="script.js"></script>
 </head>
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- ================= TOP BAR (same on every page) ================= -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#top" class="brand" aria-label="Preggo.AI home">
-        <span class="brand-mark" aria-hidden="true">🤰</span>
-        <span class="brand-name">Preggo<span class="brand-dot">.AI</span></span>
+
+      <a href="./" class="brand" aria-label="MamaFirst.AI home">
+        <!-- IMAGE SLOT: LOGO
+             Add your file at images/logo.png (240 x 240 px, transparent PNG).
+             Until the file exists, the drawn heart below is shown instead. -->
+        <span class="brand-mark image-slot">
+          <svg class="slot-placeholder" viewBox="0 0 40 40" role="img" aria-label="MamaFirst.AI heart logo">
+            <circle cx="20" cy="20" r="19" fill="#FFE1E1" stroke="#283028" stroke-width="1.5"/>
+            <path d="M20 30s-9-5.6-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.4-9 12-9 12Z" fill="#9E516E" stroke="#283028" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          <img class="slot-img" src="images/logo.png" alt="MamaFirst.AI logo" width="40" height="40" hidden>
+        </span>
+        <span class="brand-name">MamaFirst<span class="brand-dot">.AI</span></span>
       </a>
 
-      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="header-actions">
+        <nav id="site-nav" class="site-nav" aria-label="Main">
+          <a href="./" aria-current="page">Home</a>
+          <a href="chat/">Chat</a>
+          <a href="about/">Why mums trust it</a>
+          <a href="help/">Help and support</a>
+        </nav>
 
-      <nav id="site-nav" class="site-nav" aria-label="Main">
-        <a href="#about">About</a>
-        <a href="#how">How to use</a>
-        <a href="#privacy">Privacy</a>
-        <a href="#chat" class="nav-cta">Chat now</a>
-      </nav>
+        <a href="chat/" class="btn btn-primary btn-small">Chat now</a>
+
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main id="main">
 
-    <!-- ============ Welcome ============ -->
-    <section id="top" class="hero">
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <!-- Soft blob shape behind the hero -->
+      <svg class="blob blob-hero" viewBox="0 0 200 200" aria-hidden="true"><path fill="#FFE1E1" d="M45 -58C59 -47 71 -34 76 -17C81 0 79 20 69 36C59 52 41 64 21 71C1 78 -21 80 -39 71C-57 62 -71 43 -77 22C-83 1 -80 -22 -68 -39C-56 -56 -35 -66 -14 -70C7 -74 31 -69 45 -58Z" transform="translate(100 100)"/></svg>
+
       <div class="container hero-inner">
         <div class="hero-text">
-          <p class="eyebrow">SMU COR2221 · AI &amp; Humanity prototype</p>
-          <h1>Welcome to <span class="accent">Preggo.AI</span></h1>
+          <p class="eyebrow">For first-time mums in Singapore</p>
+          <h1>You're doing better than you <span class="underline">think</span>.</h1>
           <p class="lead">
-            A gentle, always-available companion that helps you find general
-            information about pregnancy — from early symptoms to preparing
-            for your little one.
+            MamaFirst.AI is a gentle chat companion from your third trimester to
+            baby's first birthday, for check-ins on how you feel and
+            everyday baby-care questions between check-ups.
           </p>
           <div class="hero-actions">
-            <a href="#chat" class="btn btn-primary">Start chatting</a>
-            <a href="#privacy" class="btn btn-ghost">Read the notice first</a>
+            <a href="chat/" class="btn btn-primary btn-large">
+              Start chatting
+              <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <p class="hero-note">Free. No sign-up. Type or speak. A companion, not a doctor.</p>
+        </div>
+
+        <div class="hero-art">
+          <!-- IMAGE SLOT: MUM ILLUSTRATION
+               Add your file at images/mum.png (1000 x 1000 px, transparent PNG).
+               Until the file exists, the drawn illustration below is shown instead. -->
+          <div class="image-slot hero-slot">
+            <svg class="slot-placeholder" viewBox="0 0 520 520" role="img" aria-label="Illustration of a smiling mum cradling her sleeping baby, with hearts floating around them">
+              <!-- background blobs -->
+              <path d="M70 262C58 156 140 62 262 60c120-2 200 82 200 190 0 118-76 210-200 214C150 468 82 368 70 262Z" fill="#FFE1E1"/>
+              <path d="M96 420c40-30 290-34 340 0 18 14-20 44-170 44S70 440 96 420Z" fill="#FFC1C1"/>
+              <!-- hair behind the head -->
+              <circle cx="306" cy="92" r="30" fill="#283028"/>
+              <path d="M186 190c0-52 32-90 76-90s76 38 76 90c0 40-10 70-20 86H206c-10-16-20-46-20-86Z" fill="#283028"/>
+              <!-- body -->
+              <path d="M138 470c0-112 44-206 124-206s124 94 124 206Z" fill="#9E516E" stroke="#283028" stroke-width="3" stroke-linejoin="round"/>
+              <!-- neck and head -->
+              <path d="M244 226h36v40c0 12-36 12-36 0Z" fill="#F3C9B2" stroke="#283028" stroke-width="3" stroke-linejoin="round"/>
+              <circle cx="262" cy="182" r="56" fill="#F8D8C6" stroke="#283028" stroke-width="3"/>
+              <!-- fringe -->
+              <path d="M207 176c2-44 30-70 58-70 32 0 54 28 53 66-24-4-44-18-55-40-12 24-32 38-56 44Z" fill="#283028"/>
+              <!-- face -->
+              <path d="M236 190q9 8 18 0M272 190q9 8 18 0" fill="none" stroke="#283028" stroke-width="3" stroke-linecap="round"/>
+              <path d="M251 210q12 10 24 0" fill="none" stroke="#283028" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="228" cy="204" r="8" fill="#F49090" opacity=".6"/>
+              <circle cx="298" cy="204" r="8" fill="#F49090" opacity=".6"/>
+              <!-- baby bundle -->
+              <g transform="rotate(-10 262 362)">
+                <ellipse cx="256" cy="364" rx="92" ry="48" fill="#FFFFFF" stroke="#283028" stroke-width="3"/>
+                <path d="M196 336c30 20 70 30 120 26" fill="none" stroke="#F49090" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="326" cy="350" r="30" fill="#F8D8C6" stroke="#283028" stroke-width="3"/>
+                <path d="M312 352q6 5 12 0M330 352q6 5 12 0" fill="none" stroke="#283028" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M321 364q6 4 11 0" fill="none" stroke="#283028" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M318 322q8-8 16 0" fill="none" stroke="#283028" stroke-width="2.5" stroke-linecap="round"/>
+              </g>
+              <!-- arm wrapped around the baby -->
+              <path d="M170 330c-14 56 24 94 86 92 48-2 92-12 112-34" fill="none" stroke="#283028" stroke-width="34" stroke-linecap="round"/>
+              <path d="M170 330c-14 56 24 94 86 92 48-2 92-12 112-34" fill="none" stroke="#9E516E" stroke-width="28" stroke-linecap="round"/>
+              <circle cx="370" cy="386" r="15" fill="#F8D8C6" stroke="#283028" stroke-width="3"/>
+              <!-- floating hearts -->
+              <g class="float-hearts">
+                <path class="heart h1" d="M96 150s-22-13-22-29a12 12 0 0 1 22-7 12 12 0 0 1 22 7c0 16-22 29-22 29Z" fill="#F49090" stroke="#283028" stroke-width="2.5" stroke-linejoin="round"/>
+                <path class="heart h2" d="M420 130s-16-10-16-22a9 9 0 0 1 16-5 9 9 0 0 1 16 5c0 12-16 22-16 22Z" fill="#9E516E" stroke="#283028" stroke-width="2.5" stroke-linejoin="round"/>
+                <path class="heart h3" d="M444 280s-12-7-12-16a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 9-12 16-12 16Z" fill="#FFC1C1" stroke="#283028" stroke-width="2.5" stroke-linejoin="round"/>
+                <path class="heart h4" d="M64 300s-10-6-10-13a6 6 0 0 1 10-3 6 6 0 0 1 10 3c0 7-10 13-10 13Z" fill="#FFFFFF" stroke="#283028" stroke-width="2.5" stroke-linejoin="round"/>
+              </g>
+            </svg>
+            <img class="slot-img" src="images/mum.png" alt="Illustration of a smiling mum holding her baby" width="1000" height="1000" hidden>
           </div>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="bubble bubble-user">Is it normal to feel tired in the first trimester?</div>
-          <div class="bubble bubble-bot">Many people do! Here's some general information… 💗</div>
-        </div>
       </div>
     </section>
 
-    <!-- ============ About ============ -->
-    <section id="about" class="section">
+    <!-- ================= HOW IT HELPS ================= -->
+    <section id="how" class="section section-blush">
       <div class="container">
-        <h2>What is Preggo.AI?</h2>
-        <p class="section-intro">
-          Preggo.AI is a conversational assistant built with Google's
-          CX Agent Studio. It answers everyday pregnancy questions in plain,
-          friendly language.
-        </p>
+        <div class="section-head reveal">
+          <h2>How it helps</h2>
+          <p>Small, kind answers for the moments between check-ups.</p>
+        </div>
 
-        <div class="cards">
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">📚</div>
-            <h3>General information</h3>
-            <p>Learn about pregnancy stages, common symptoms, nutrition and wellbeing.</p>
+        <div class="cards cards-3">
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M24 40S8 30.5 8 19a8.5 8.5 0 0 1 16-4 8.5 8.5 0 0 1 16 4c0 11.500-16 21-16 21Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="m17 22 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Know what's normal</h3>
+            <p>Not sure if something is okay? Ask in your own words and get a clear, calm answer.</p>
           </article>
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">🕒</div>
-            <h3>Available anytime</h3>
-            <p>Ask questions whenever they come up, day or night.</p>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M38 28.500A15 15 0 1 1 19.500 10 12 12 0 0 0 38 28.500Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M33 8v6M30 11h6M40 17v4M38 19h4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Baby-care help at any hour</h3>
+            <p>Feeding, sleep, crying, nappies. Even at 3am, you don't have to guess alone. Hands full? Just tap the mic and speak.</p>
           </article>
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">🩺</div>
-            <h3>Points you to care</h3>
-            <p>Encourages you to speak with a doctor or midwife for anything personal or urgent.</p>
+
+          <article class="card reveal">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M8 12a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H22l-9 8v-8h-1a4 4 0 0 1-4-4Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 27s-6-3.600-6-8a3.300 3.300 0 0 1 6-1.600 3.300 3.300 0 0 1 6 1.600c0 4.400-6 8-6 8Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Take a first step to support</h3>
+            <p>Find the words to tell your partner, family or doctor how you really feel.</p>
           </article>
         </div>
-      </div>
-    </section>
 
-    <!-- ============ How to use ============ -->
-    <section id="how" class="section section-tint">
-      <div class="container">
-        <h2>How to use it</h2>
-        <ol class="steps">
-          <li><strong>Open the chat</strong> using the chat window or bubble on this page.</li>
-          <li><strong>Ask a question</strong> in your own words, e.g. “What foods should I avoid?”</li>
-          <li><strong>Check with a professional</strong> before acting on anything important.</li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ============ Prototype & privacy notice ============ -->
-    <section id="privacy" class="section">
-      <div class="container">
-        <div class="notice" role="note" aria-labelledby="notice-title">
-          <h2 id="notice-title">⚠️ Prototype &amp; privacy notice</h2>
-          <ul>
-            <li>
-              <strong>This is a student prototype</strong> made for an SMU
-              course project. It is not a medical device or a commercial service.
-            </li>
-            <li>
-              <strong>Not medical advice.</strong> Answers are general and may be
-              incomplete or wrong. Always consult a qualified doctor, midwife or
-              pharmacist about your own health.
-            </li>
-            <li>
-              <strong>In an emergency</strong> (e.g. heavy bleeding, severe pain,
-              reduced baby movements), call <a href="tel:995">995</a> or go to
-              the nearest A&amp;E immediately.
-            </li>
-            <li>
-              <strong>This website does not store your conversations.</strong>
-              Messages are sent to and processed by Google's CX Agent Studio
-              service, which powers the chatbot.
-            </li>
-            <li>
-              <strong>Please don't share personal details</strong> such as your
-              full name, NRIC, contact details or medical records.
-            </li>
-          </ul>
+        <div class="section-cta reveal">
+          <a href="chat/" class="btn btn-primary">Open the chat</a>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ Chat ============ -->
-    <section id="chat" class="section section-tint">
-      <div class="container">
-        <h2>Chat with Preggo.AI</h2>
-        <p class="section-intro">
-          By using the chat you acknowledge the notice above.
-        </p>
-        <div class="chat-hint">
-          <span class="chat-hint-icon" aria-hidden="true">💬</span>
-          <p>
-            Look for the <strong>Preggo.AI chat</strong> window or bubble at
-            the <strong>bottom-right</strong> of your screen.
-          </p>
-        </div>
-        <noscript>
-          <p class="chat-hint">The chat needs JavaScript enabled in your browser.</p>
-        </noscript>
       </div>
     </section>
 
   </main>
 
+  <!-- ================= FOOTER (same on every page) ================= -->
   <footer class="site-footer">
     <div class="container">
-      <p>Preggo.AI · SMU COR2221 AI &amp; Humanity school project · © <span id="year">2026</span></p>
-      <p class="footer-small">Prototype for educational purposes only. Not a substitute for professional medical advice.</p>
+      <p><strong>MamaFirst.AI is a companion, not a doctor. It does not give medical advice.</strong></p>
+      <p class="footer-small">A student prototype for SMU COR2221 AI &amp; Humanity · © <span id="year">2026</span></p>
     </div>
   </footer>
 
-  <!-- =====================================================================
-       GOOGLE EMBED SNIPPET 2 of 2  —  PASTE AT THE END OF <body>
-       ---------------------------------------------------------------------
-       Paste the official CX Agent Studio "Web Widget" body code here:
-       the <script> that calls chatSdk.registerContext(...) AND the
-       <chat-messenger> ... </chat-messenger> element.
-       Tip: set color-scheme="light" on <chat-messenger> to suit this theme.
-       ===================================================================== -->
-  <!-- ▼▼▼ START: GOOGLE SNIPPET 2 (body: register script + <chat-messenger>) ▼▼▼ -->
-  <script>
-    window.addEventListener("chat-messenger-loaded", () => {
-      chatSdk.registerContext(
-        chatSdk.prebuilts.ces.createContext({
-          deploymentName: "projects/294790140312/locations/us/apps/db7a7e7b-9b57-4142-a606-e62d2f2ff1dc/deployments/9d680ce7-be44-4211-977a-3e3397b74d0d",
-          tokenBroker: {
-            enableTokenBroker: true,
-            enableRecaptcha: false
-          }
-        }),
-      );
-    });
-  </script>
-  <!-- Update the url-allowlist attribute with a comma-separated list of origins allowed to render images -->
-  <chat-messenger
-    url-allowlist="*"
-    color-scheme="light"
-  >
-    <chat-messenger-container
-      chat-title="Preggo.AI"
-      chat-title-icon="https://gstatic.com/dialogflow-console/common/assets/ccai-favicons/conversational_agents.png"
-    >
-      <chat-reset-session-button
-        slot="titlebar-actions"
-        title-text="Start new chat"
-      ></chat-reset-session-button>
-      <chat-toggle-dialog-button
-        slot="titlebar-actions"
-        title-text-expanded="Collapse"
-        title-text-collapsed="Expand"
-      ></chat-toggle-dialog-button>
-      <chat-messenger-close-button
-        slot="titlebar-actions"
-        title-text="Close"
-      ></chat-messenger-close-button>
-    </chat-messenger-container>
-  </chat-messenger>
-  <!-- ▲▲▲ END: GOOGLE SNIPPET 2 ▲▲▲ -->
+  <!-- ================= "NEED URGENT HELP?" BUTTON + POP-UP (same on every page) ================= -->
+  <div class="urgent" id="urgent">
+    <div class="urgent-panel" id="urgent-panel" role="dialog" aria-label="Urgent help numbers" hidden>
+      <div class="urgent-panel-head">
+        <strong>Need help right now?</strong>
+        <button type="button" class="urgent-close" id="urgent-close" aria-label="Close urgent help">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <a class="urgent-link" href="tel:995">
+        <span class="urgent-number">995</span>
+        <span>Emergency ambulance</span>
+      </a>
+      <a class="urgent-link" href="tel:1771">
+        <span class="urgent-number">1771</span>
+        <span>Mindline, someone to talk to, 24 hours</span>
+      </a>
+    </div>
+    <button type="button" class="urgent-button" id="urgent-button" aria-expanded="false" aria-controls="urgent-panel">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.500 3.500h3l1.500 4-2 1.500a11 11 0 0 0 6 6l1.500-2 4 1.500v3a2 2 0 0 1-2 2A16 16 0 0 1 4.500 5.500a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      Need urgent help?
+    </button>
+  </div>
 
 </body>
 </html>
