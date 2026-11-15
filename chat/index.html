@@ -110,7 +110,14 @@
           </div>
 
           <!-- Messages appear here. aria-live lets screen readers read new replies aloud. -->
-          <div class="messages" id="messages" role="log" aria-live="polite" aria-label="Chat messages" tabindex="0"></div>
+          <div class="messages" id="messages" role="log" aria-live="polite" aria-label="Chat messages" tabindex="0">
+            <!-- Empty-state placeholder: shown only while there are no messages.
+                 It is not a chat message and is never sent to the agent. -->
+            <div class="chat-empty" id="chat-empty">
+              <p class="chat-empty-title"><span aria-hidden="true">💗</span> What's on your mind today?</p>
+              <p class="chat-empty-text">Choose a suggestion below, or ask me anything.</p>
+            </div>
+          </div>
 
           <!-- Starter buttons: tapping one sends its text as a message -->
           <div class="starters" id="starters" aria-label="Suggested messages">

@@ -61,11 +61,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const finishButton  = document.getElementById("finish-chat");
     const micButton     = document.getElementById("mic");
     const micStatus     = document.getElementById("mic-status");
+    const emptyState    = document.getElementById("chat-empty"); // "What's on your mind today?" placeholder
 
     // The (hidden) Google widget. We send messages through it.
     const widget = document.querySelector("chat-messenger");
 
-    const GREETING = "Hi, I'm MamaFirst. What's on your mind? Tap a suggestion below, type your own question, or tap the mic to speak.";
     const ERROR_TEXT = "Sorry, I couldn't reply just now. Please try again in a moment. If this is urgent, call 995.";
     const FINISH_TEXT = "I'm done chatting for today."; // sent by the "Finish chat" button
     const INPUT_MAX_HEIGHT = 220; // px: the box grows up to this, then scrolls
@@ -153,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         bubble.textContent = text; // her own words are shown exactly as typed
       }
+      if (emptyState) emptyState.hidden = true; // a real message exists now
       messages.appendChild(bubble);
       scrollToNewest();
     }
@@ -252,10 +253,11 @@ document.addEventListener("DOMContentLoaded", () => {
       stopListening();
       hideTyping();
       messages.innerHTML = "";
+      // Put the empty-state placeholder back (no greeting: the agent sends its own)
+      if (emptyState) { emptyState.hidden = false; messages.appendChild(emptyState); }
       userMessageCount = 0;
       updateStarters();
       updateSendButton();
-      addBubble(GREETING, "bot");
       // Ask the Google widget to forget the old conversation too
       try { widget.startNewSession(); } catch (error) { /* widget not ready yet: nothing to forget */ }
     }
@@ -390,8 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Show the greeting when the page first loads
-    addBubble(GREETING, "bot");
+    // On first load the empty-state placeholder (in the HTML) is already showing
     updateSendButton();
     resizeInput();
   }

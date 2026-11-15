@@ -412,6 +412,30 @@ chat-messenger { display: none !important; }
   gap: 10px;
   padding: 16px 14px;
 }
+/* Empty-state placeholder, centred in the chat area until the first message */
+.chat-empty {
+  margin: auto;                 /* centres it both ways inside the flex column */
+  max-width: 28ch;
+  padding: 24px 12px;
+  text-align: center;
+  animation: pop 0.2s ease-out;
+}
+.chat-empty[hidden] { display: none; }
+.chat-empty-title {
+  margin: 0 0 8px;
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--plum-dark);
+}
+.chat-empty-text {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink);
+  opacity: 0.75;
+}
 .bubble {
   max-width: 86%;
   padding: 10px 16px;
