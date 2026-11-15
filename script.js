@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const input         = document.getElementById("chat-input");
     const sendButton    = document.getElementById("send");
     const newChatButton = document.getElementById("new-chat");
+    const finishButton  = document.getElementById("finish-chat");
     const micButton     = document.getElementById("mic");
     const micStatus     = document.getElementById("mic-status");
 
@@ -66,11 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const GREETING = "Hi, I'm MamaFirst. What's on your mind? Tap a suggestion below, type your own question, or tap the mic to speak.";
     const ERROR_TEXT = "Sorry, I couldn't reply just now. Please try again in a moment. If this is urgent, call 995.";
+    const FINISH_TEXT = "I'm done chatting for today."; // sent by the "Finish chat" button
     const INPUT_MAX_HEIGHT = 220; // px: the box grows up to this, then scrolls
+    const STARTER_MESSAGE_LIMIT = 2; // starter buttons hide after she has sent this many messages
 
     let waitingForReply = false;  // true while the bot is "typing"
     let typingBubble = null;      // the three-dots bubble, when it is showing
     let replyTimer = null;        // gives up waiting after a while
+    let userMessageCount = 0;     // how many messages she has sent in this chat
 
     // --- Turn the bot's text into safe HTML -------------------
     // The bot writes simple formatting (**bold**, bullet lists, links).
@@ -84,12 +88,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function formatInline(text) {
+      // Links are set aside first (as numbered placeholders) so the bold and
+      // italic rules can never change a web address, then put back at the end.
+      const links = [];
+      function keepLink(label, href) {
+        links.push('<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + label + "</a>");
+        return "\u0000" + (links.length - 1) + "\u0000";
+      }
+
       return escapeHtml(text)
         // [words](https://link) becomes a link (only web, phone and email links allowed)
         .replace(/\[([^\]]+)\]\(((?:https?:|tel:|mailto:)[^)\s]+)\)/g,
-                 '<a href="$2" target="_blank" rel="noopener">$1</a>')
+                 (match, label, href) => keepLink(label, href))
+        // A plain https:// address on its own also becomes a link (e.g. a PDF download)
+        .replace(/https?:\/\/(?:(?!&quot;|&gt;)[^\s<])*(?:(?!&quot;|&gt;)[^\s<.,;:!?)'"])/g,
+                 (href) => keepLink(href, href))
         .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")   // **bold**
-        .replace(/(^|[\s(])\*([^*\s][^*]*)\*/g, "$1<em>$2</em>"); // *italic*
+        .replace(/(^|[\s(])\*([^*\s][^*]*)\*/g, "$1<em>$2</em>") // *italic*
+        .replace(/\u0000(\d+)\u0000/g, (match, index) => links[index]);
     }
 
     function formatBotText(text) {
@@ -141,9 +157,18 @@ document.addEventListener("DOMContentLoaded", () => {
       scrollToNewest();
     }
 
-    // The send button is off when the box is empty (or while the bot is replying)
+    // The send button is off when the box is empty (or while the bot is replying).
+    // "Finish chat" is off until she has said something, and while the bot is replying.
     function updateSendButton() {
       sendButton.disabled = input.value.trim() === "" || waitingForReply;
+      if (finishButton) finishButton.disabled = userMessageCount === 0 || waitingForReply;
+    }
+
+    // Starter buttons: full size when the chat is new, one compact row after her
+    // first message, then hidden once she is chatting properly.
+    function updateStarters() {
+      starters.classList.toggle("is-compact", userMessageCount > 0);
+      starters.hidden = userMessageCount >= STARTER_MESSAGE_LIMIT;
     }
 
     // Let the message box grow as she types more lines (never smaller than its 3 rows)
@@ -194,7 +219,8 @@ document.addEventListener("DOMContentLoaded", () => {
       addBubble(text, "user");
       input.value = "";
       resizeInput();
-      starters.classList.add("is-compact"); // starter buttons shrink to one row
+      userMessageCount++;
+      updateStarters();
       showTyping();
 
       // Hand the message to the Google widget, which sends it to the agent
@@ -226,7 +252,9 @@ document.addEventListener("DOMContentLoaded", () => {
       stopListening();
       hideTyping();
       messages.innerHTML = "";
-      starters.classList.remove("is-compact");
+      userMessageCount = 0;
+      updateStarters();
+      updateSendButton();
       addBubble(GREETING, "bot");
       // Ask the Google widget to forget the old conversation too
       try { widget.startNewSession(); } catch (error) { /* widget not ready yet: nothing to forget */ }
@@ -267,6 +295,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     newChatButton.addEventListener("click", startNewChat);
+
+    // "Finish chat" sends a normal message. The agent replies and offers the
+    // optional PDF summary; she answers in the chat as usual. Nothing is cleared,
+    // and sendMessage ignores extra taps while the bot is still replying.
+    if (finishButton) {
+      finishButton.addEventListener("click", () => sendMessage(FINISH_TEXT));
+    }
 
 
     // ----------------------------------------------------------

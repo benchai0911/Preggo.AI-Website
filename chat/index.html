@@ -101,7 +101,12 @@
               <strong>MamaFirst</strong>
               <span>Here for you, any hour</span>
             </div>
-            <button type="button" class="btn-text" id="new-chat">New chat</button>
+            <div class="phone-actions">
+              <!-- Finish chat: sends "I'm done chatting for today." like a normal message.
+                   The agent then offers the optional PDF summary. Nothing is cleared. -->
+              <button type="button" class="btn-text btn-finish" id="finish-chat" disabled>Finish chat</button>
+              <button type="button" class="btn-text" id="new-chat">New chat</button>
+            </div>
           </div>
 
           <!-- Messages appear here. aria-live lets screen readers read new replies aloud. -->
@@ -109,10 +114,9 @@
 
           <!-- Starter buttons: tapping one sends its text as a message -->
           <div class="starters" id="starters" aria-label="Suggested messages">
-            <button type="button" class="chip" data-starter="Is this normal?">Is this normal?</button>
-            <button type="button" class="chip" data-starter="I'm feeling overwhelmed">I'm feeling overwhelmed</button>
-            <button type="button" class="chip" data-starter="Baby care question">Baby care question</button>
-            <button type="button" class="chip" data-starter="Help me talk to my partner">Help me talk to my partner</button>
+            <button type="button" class="chip" data-starter="I'd like help with pregnancy and preparing for birth.">Pregnancy support</button>
+            <button type="button" class="chip" data-starter="I'd like help with baby care and postnatal recovery.">Baby &amp; postnatal care</button>
+            <button type="button" class="chip" data-starter="I'm feeling overwhelmed and need someone to talk to.">I'm feeling overwhelmed</button>
           </div>
 
           <form class="composer" id="composer" autocomplete="off">

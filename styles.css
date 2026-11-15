@@ -375,6 +375,32 @@ chat-messenger { display: none !important; }
 .phone-title strong { display: block; font-family: var(--font-head); font-size: 1.05rem; }
 .phone-title span { display: block; font-size: 0.875rem; }
 
+/* "Finish chat" and "New chat" sit side by side on the right of the header */
+.phone-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: none;
+}
+/* "Finish chat" is the softer of the two: blush fill, plum text */
+.btn-finish {
+  background: var(--blush);
+  color: var(--plum-dark);
+}
+.btn-finish:hover  { background: var(--white); }
+.btn-finish:active { background: var(--mauve); }
+.btn-text:disabled,
+.btn-text:disabled:hover { opacity: 0.55; cursor: default; background: var(--blush); }
+
+/* Small phones: the two buttons move onto their own row under the title,
+   sharing the width equally, so the title and subtitle are never squeezed */
+@media (max-width: 479px) {
+  .phone-top { flex-wrap: wrap; row-gap: 8px; padding: 10px 12px; }
+  .phone-actions { width: 100%; flex-wrap: nowrap; }
+  .phone-actions .btn-text { flex: 1; min-height: 40px; padding: 6px 10px; font-size: 0.875rem; }
+}
+
 /* The scrolling list of messages */
 .messages {
   flex: 1;
@@ -403,7 +429,8 @@ chat-messenger { display: none !important; }
   background: var(--blush);
   border-bottom-left-radius: 6px;
 }
-.bubble-bot a { color: var(--plum-dark); font-weight: 600; }
+.bubble-bot a { color: var(--plum-dark); font-weight: 600; text-decoration: underline; }
+.bubble-bot a:hover { color: var(--plum-darker); }
 .bubble-user {
   align-self: flex-end;
   background: var(--plum);
